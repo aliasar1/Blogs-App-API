@@ -26,7 +26,10 @@ const addBlog = asyncHandler(async (req, res) => {
 });
 
 const updateBlog = asyncHandler(async (req, res) => {
-    res.status(200).json({message: 'Update Blog are here'});
+    const blog = await Blog.findByIdAndUpdate(req.params.id, {name: req.body.name, description: req.body.description}, { new: true });
+    if(!blog) return res.status(404).send('Blog with the given ID not found');
+
+    res.status(200).send(blog);
 });
 
 const deleteBlog = asyncHandler(async (req, res) => {
