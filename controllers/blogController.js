@@ -1,6 +1,5 @@
 const asyncHandler = require('express-async-handler');
 const Blog = require('../models/blog');
-const blog = require('../models/blog');
 
 const getAllBlogs = asyncHandler(async (req, res) => {
     const blogs = await Blog.find({});

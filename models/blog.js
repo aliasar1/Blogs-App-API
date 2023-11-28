@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const blogSchema = mongoose.Schema({
         name: {
             type: String,
-            required: (true, "Please add blog name"),
+            required: [true, "Please add blog name"],
         },
         description: {
             type: String,
-            required: (true, "Please add blog description"),
+            required: [true, "Please add blog description"],
         },
     },
     {
