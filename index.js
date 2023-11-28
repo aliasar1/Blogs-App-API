@@ -11,6 +11,7 @@ app.use('/api/blogs', blogRoutes);
 
 const userRoutes = require('./routes/user');
 app.use('/api/users', userRoutes);
+
 const errorHandler = require('./middlewares/errorHandler');
 app.use(errorHandler);
 
