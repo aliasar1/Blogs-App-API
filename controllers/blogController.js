@@ -9,7 +9,10 @@ const getAllBlogs = asyncHandler(async (req, res) => {
 
 const getBlog = asyncHandler(async (req, res) => {
     const blog = await Blog.findById(req.params.id);
-    if(!blog) return res.status(404).send('Blog with the given ID is not found.');
+    if(!blog){
+        res.status(404);
+        throw new Error("Blog not found with given ID.");
+    }
 
     res.status(200).json(blog);
 });
@@ -26,14 +29,28 @@ const addBlog = asyncHandler(async (req, res) => {
 });
 
 const updateBlog = asyncHandler(async (req, res) => {
-    const blog = await Blog.findByIdAndUpdate(req.params.id, {name: req.body.name, description: req.body.description}, { new: true });
-    if(!blog) return res.status(404).send('Blog with the given ID not found');
+    const {name, description} = req.body;
+    if(!name || !description){
+        res.status(400);
+        throw new Error("All fields are mandatory.");
+    }
+    const blog = await Blog.findByIdAndUpdate(req.params.id, {name, description}, { new: true });
+    if(!blog){
+        res.status(404);
+        throw new Error("Blog not found with given ID.");
+    }
 
     res.status(200).send(blog);
 });
 
 const deleteBlog = asyncHandler(async (req, res) => {
-    res.status(200).json({message: 'Delete Blog are here'});
-});
+    const blog = await Blog.findByIdAndDelete({_id: req.params.id});
+    if(!blog){
+        res.status(404);
+        throw new Error("Blog not found with given ID.");
+    }
+    res.status(200).send(blog);
+ });
+ 
 
 module.exports = { getAllBlogs, getBlog, addBlog, updateBlog, deleteBlog };
