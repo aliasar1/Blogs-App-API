@@ -10,9 +10,9 @@ const {
 
 router.get('/', getAllBlogs);
 
-router.get('/:id', getBlog);
-
 router.post('/', addBlog);
+
+router.get('/:id', getBlog);
 
 router.put('/:id', updateBlog);
 
