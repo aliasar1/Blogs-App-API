@@ -6,10 +6,10 @@ const app = express();
 app.use(express.json());
 connectDb();
 
-const blogRoutes = require('./routes/blogs');
+const blogRoutes = require('./routes/blogsRoutes');
 app.use('/api/blogs', blogRoutes);
 
-const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/userRoutes');
 app.use('/api/users', userRoutes);
 
 const errorHandler = require('./middlewares/errorHandler');
