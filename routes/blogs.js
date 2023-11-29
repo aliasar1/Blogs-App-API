@@ -7,6 +7,9 @@ const {
     updateBlog,
     deleteBlog
     } = require('../controllers/blogController'); 
+const validateToken = require('../middlewares/validateTokenHandler');
+
+router.use(validateToken);
 
 router.get('/', getAllBlogs);
 
